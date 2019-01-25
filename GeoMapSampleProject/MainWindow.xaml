@@ -1,0 +1,58 @@
+﻿<Window x:Class="GeoMapSampleProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ig="http://schemas.infragistics.com/xaml"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ig:XamGeographicMap Name="GeoMap" OverviewPlusDetailPaneVisibility="Collapsed" Background="Black">
+            <ig:XamGeographicMap.Series>
+                <ig:GeographicProportionalSymbolSeries x:Name="SymbolSeries" 
+                                           ItemsSource="{Binding SnowPoints}" 
+                                           LatitudeMemberPath="Latitude"
+                                           LongitudeMemberPath="Longitude"
+                                           MaximumMarkers="2200" 
+                                           MarkerOutline="Transparent"
+                                           FillMemberPath="SnowHeight"
+                                           MarkerType="Square">
+                    <ig:GeographicProportionalSymbolSeries.RadiusScale>
+                        <ig:SizeScale MaximumValue="10" MinimumValue="10" IsLogarithmic="False" LogarithmBase="2"/>
+                    </ig:GeographicProportionalSymbolSeries.RadiusScale>
+                    <ig:GeographicProportionalSymbolSeries.FillScale>
+                        <ig:ValueBrushScale MaximumValue="4" MinimumValue="0" IsLogarithmic="False"   >
+                            <ig:ValueBrushScale.Brushes>
+                                <ig:BrushCollection>
+                                    <SolidColorBrush Color="#FF1AA1E2"/>
+                                    <SolidColorBrush Color="#FF4AC4FF"/>
+                                    <SolidColorBrush Color="#FFB5CC2E"/>
+                                    <SolidColorBrush Color="#FFFFD034"/>
+                                    <SolidColorBrush Color="#FFFC8612"/>
+                                    <SolidColorBrush Color="#FFED4840"/>
+                                    <SolidColorBrush Color="#FF7D120D"/>
+                                </ig:BrushCollection>
+                            </ig:ValueBrushScale.Brushes>
+                        </ig:ValueBrushScale>
+                    </ig:GeographicProportionalSymbolSeries.FillScale>
+                    <ig:GeographicProportionalSymbolSeries.ToolTip>
+                        <Border >
+                            <Border BorderBrush="DimGray" BorderThickness="1" Background="Gray">
+                                <StackPanel Margin="4">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <TextBlock Text="Longitude" Margin="2" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Path=Item.Longitude, StringFormat='0.0'}" Foreground="WhiteSmoke" Margin="4,2,2,2" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <TextBlock Text="Latitude" Foreground="WhiteSmoke" Margin="2" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding Path=Item.Latitude, StringFormat='0.0'}" Foreground="WhiteSmoke" Margin="4,2,2,2" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </Border>
+                    </ig:GeographicProportionalSymbolSeries.ToolTip>
+                </ig:GeographicProportionalSymbolSeries>
+            </ig:XamGeographicMap.Series>
+        </ig:XamGeographicMap>
+    </Grid>
+</Window>
